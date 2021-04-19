@@ -89,4 +89,28 @@ class CommentsMixin:
             'data':serializer.data
         })
 
+class LikesMixin:
+    @action(methods=['POST'], detail=True)
+    def like_dislike(self, request, *args, **kwargs):
+        if not self.model_class.objects.filter(id=kwargs.get('pk')).exists():
+            return Response(data={
+                'status':False,
+                'message':f'Blog not found'
+            })
+        blogs = self.model_class.objects.get(id=kwargs.get('pk'))
         
+        _user = self.request.user.pk
+        if blogs.likes.filter(id=_user).exists():
+            blogs.likes.remove(_user)
+
+            return Response(data={
+                'status':True,
+                'message':f'{self.instance_name} disliked successfully',
+            })
+        
+        blogs.likes.add(_user)
+        return Response(data={
+            'status':True,
+            'message':f'{self.instance_name} liked successfully',
+        })
+

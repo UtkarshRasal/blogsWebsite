@@ -22,6 +22,7 @@ class Blogs(BaseModel):
     title           = models.CharField(max_length=255)
     content         = models.TextField()
     tags            = models.ManyToManyField(Tags)
+    likes           = models.ManyToManyField(User, related_name='likes')
     media_file      = models.CharField(max_length=255, blank=True)
 
     class Meta:
@@ -44,16 +45,3 @@ class Comments(BaseModel):
 
     def __all__(self):
         return self.id 
-
-class Likes(BaseModel):
-    '''comments model with foreign keys to blog and users'''
-
-    blog            = models.ForeignKey(Blogs, null=True, on_delete=models.CASCADE)
-    user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ['created_at']
-        verbose_name_plural='Likes'
-
-    def __all__(self):
-        return self.user

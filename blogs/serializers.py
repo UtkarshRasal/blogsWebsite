@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Blogs, Comments, Likes, Tags
+from .models import Blogs, Comments, Tags
 
 class TagsSerializer(serializers.ModelSerializer):
 
@@ -45,10 +45,4 @@ class CommentsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comments
-        fields = '__all__'
-
-class LikesSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Likes
         fields = '__all__'
