@@ -20,8 +20,6 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
     def get_queryset(self):
         return self.model_class.objects.all()
     
-    # def get_serializer_class(self):
-    #     return self.serializer_class
 
     def list(self, request):
         assert self.serializer_class is not None
@@ -45,7 +43,8 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
         }, status=status.HTTP_200_OK)
     
     def create(self, request, *args, **kwargs):
-        path = file_path(request) #get the path of the media file
+        current_site = get_current_site(request).domain
+        path = 'http://' + current_site + '/' + file_path(request)
         _tags = request.data['tags']
         tags = json.loads(_tags) #convert string to dictionary
 
@@ -57,15 +56,11 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
                                                     }})
         if serializers.is_valid():
             serializers.save()
-            data = serializers.data 
-            current_site = get_current_site(request).domain
-            absurl = 'http://' + current_site + '/' + file_path(request)
-            data['media_file'] = absurl
-
+            
             return Response(data={
                 'status':True,
                 'message':f"{self.instance_name} created Successfully",
-                'data':data
+                'data':serializers.data
 
             }, status=status.HTTP_201_CREATED)
 

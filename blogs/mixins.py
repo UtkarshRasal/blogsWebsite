@@ -41,8 +41,6 @@ class CommentsMixin:
     def post_comment(self, request, pk, *args, **kwargs):
         user = request.data
 
-        import pdb;pdb.set_trace()
-
         '''check if blog exist or not'''
         if not self.model_class.objects.filter(id=pk).exists():
             return Response(data={
