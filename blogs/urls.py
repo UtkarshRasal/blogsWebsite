@@ -7,8 +7,6 @@ from blogs import views
 
 router = DefaultRouter()
 router.register(r'blogs', views.BlogsView, basename='blogs')
-router.register(r'comments', views.CommentsView, basename='comments')
-router.register(r'likes', views.LikesView, basename='likes')
 
 urlpatterns = [
     path('', include(router.urls)),

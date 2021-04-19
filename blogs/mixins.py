@@ -1,6 +1,9 @@
-from rest_framework import pagination
+from rest_framework import pagination, status, permissions
+from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
+from rest_framework.decorators import action
+from blogs.models import Comments
 
 class BaseFilterMixin:
     search_fields = ['title', 'content']
@@ -31,5 +34,59 @@ class PaginationHandlerMixin(object):
     def get_paginated_response(self, data):
         assert self.paginator is not None
         return self.paginator.get_paginated_response(data)
+
+class CommentsMixin:
+    permission_classes = [permissions.IsAuthenticated]
+    @action(methods=['POST'], detail=True)
+    def post_comment(self, request, pk, *args, **kwargs):
+        user = request.data
+
+        import pdb;pdb.set_trace()
+
+        '''check if blog exist or not'''
+        if not self.model_class.objects.filter(id=pk).exists():
+            return Response(data={
+                'status':False,
+                'message':f'Blog not found'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        blog = self.model_class.objects.get(id=pk)
+        serializers = self.get_serializer(data={**user, **{'user':request.user.pk,
+                                                             'blog':blog.id}})
+        if serializers.is_valid():
+            serializers.save()
+
+            return Response(data={
+                'status':True,
+                'message':f"{self.instance_name} created Successfully",
+                'data':serializers.data
+
+            }, status=status.HTTP_201_CREATED)
+
+        return Response(data={
+            'status':False,
+            'message':f"{self.instance_name} creation failed",
+            'data':serializers.errors
+
+        }, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(methods=['GET'], detail=True)
+    def comment(self, request, pk,  *args, **kwargs):
+        if not self.model_class.objects.filter(id=pk).exists():
+            return Response(data={
+                'status':False,
+                'message':f'Blog not found'
+            })
+        
+        blog = self.model_class.objects.get(id=pk)
+
+        instance = Comments.objects.filter(blog=blog.id)
+        serializer = self.get_serializer(instance=instance, many=True)
+    
+        return Response(data={
+            'status':True,
+            'message':f'Comments retrieved successfully',
+            'data':serializer.data
+        })
 
         

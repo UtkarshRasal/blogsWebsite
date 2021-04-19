@@ -19,8 +19,13 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
     '''fetch queryset'''
     def get_queryset(self):
         return self.model_class.objects.all()
+    
+    # def get_serializer_class(self):
+    #     return self.serializer_class
 
     def list(self, request):
+        assert self.serializer_class is not None
+        assert self.model_class is not None
         instance = self.model_class.objects.filter(user=request.user.pk)
 
         '''search filter'''
@@ -29,7 +34,7 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
         '''pagination'''
         page = self.paginate_queryset(queryset_list)
         if page is not None:
-            serializer = self.get_paginated_response(self.get_serializer(page, many=True).data)
+            serializer = self.get_paginated_response(self.serializer_class(page, many=True).data)
         else:
             serializer = self.get_serializer(instance, many=True)  
 
@@ -44,7 +49,7 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
         _tags = request.data['tags']
         tags = json.loads(_tags) #convert string to dictionary
 
-        serializers = self.serializer_class(data={**{'user':request.user.pk,
+        serializers = self.get_serializer(data={**{'user':request.user.pk,
                                                     'media_file':path,
                                                     'title':request.data['title'],
                                                     'content':request.data['content'],
@@ -71,8 +76,10 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
         }, status=status.HTTP_400_BAD_REQUEST)
     
     def retrieve(self, request, pk):
+        assert self.serializer_class is not None
+        assert self.model_class is not None
         instance = self.model_class.objects.get(id=pk)
-        serializer = self.get_serializer(instance=instance)
+        serializer = self.serializer_class(instance=instance)
 
         return Response(data={
             'status':True,
@@ -81,8 +88,10 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
         })
 
     def partial_update(self, request, pk=None, *args, **kwargs):
+        assert self.serializer_class is not None
+        assert self.model_class is not None
         instance = self.model_class.objects.get(id=pk)
-        serializers = self.serializer_class(instance=instance, data=request.data, partial=True)
+        serializers = self.get_serializer(instance=instance, data=request.data, partial=True)
         if serializers.is_valid():
             serializers.save()
 
@@ -99,6 +108,7 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
             }) 
 
     def destroy(self, request, pk, *args, **kwargs):
+        assert self.model_class is not None
         instance = self.model_class.objects.filter(id=pk)
         instance.delete()
 
@@ -106,53 +116,3 @@ class BaseViewSet(ModelViewSet, mixins.PaginationHandlerMixin, mixins.BaseFilter
             'status':True,
             'message':f'{self.instance_name} deleted',
         }, status=status.HTTP_200_OK)
-
-    @action(methods=['POST'], detail=True)
-    def post_like_comment(self, request, pk, *args, **kwargs):
-        user = request.data
-        
-        '''check if blog exist or not'''
-        if not Blogs.objects.filter(id=pk).exists():
-            return Response(data={
-                'status':False,
-                'message':f'Blog not found'
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
-        blog = Blogs.objects.get(id=pk)
-        serializers = self.get_serializer(data={**user, **{'user':request.user.pk,
-                                                             'blog':blog.id}})
-        if serializers.is_valid():
-            serializers.save()
-
-            return Response(data={
-                'status':True,
-                'message':f"{self.instance_name} created Successfully",
-                'data':serializers.data
-
-            }, status=status.HTTP_201_CREATED)
-
-        return Response(data={
-            'status':False,
-            'message':f"{self.instance_name} creation failed",
-            'data':serializers.errors
-
-        }, status=status.HTTP_400_BAD_REQUEST)
-    
-    @action(methods=['GET'], detail=True)
-    def get_like_comment(self, request, pk,  *args, **kwargs):
-        if not Blogs.objects.filter(id=pk).exists():
-            return Response(data={
-                'status':False,
-                'message':f'Blog not found'
-            })
-        
-        blog = Blogs.objects.get(id=pk)
-
-        instance = self.model_class.objects.filter(blog=blog.id)
-        serializer = self.get_serializer(instance=instance, many=True)
-    
-        return Response(data={
-            'status':True,
-            'message':f'{self.instance_name} retrieved successfully',
-            'data':serializer.data
-        })
