@@ -45,3 +45,14 @@ class Comments(BaseModel):
 
     def __all__(self):
         return self.id 
+
+class Activity(BaseModel):
+    user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    blog           = models.ForeignKey(Blogs, null=True, on_delete=models.CASCADE)
+
+    logs            = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ['created_at']
+        verbose_name_plural = 'Activity'
+    

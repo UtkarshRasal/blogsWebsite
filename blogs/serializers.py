@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from .models import Blogs, Comments, Tags
+from .models import Blogs, Comments, Tags, Activity
+from accounts.serializers import UserShowSerializer
+
+
+class TagsShowSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tags
+        fields = ['id', 'name']
 
 class TagsSerializer(serializers.ModelSerializer):
 
@@ -38,7 +46,7 @@ class BlogsSerializer(serializers.ModelSerializer):
         instance.tags.clear()
         instance.tags.set(tag_list)
 
-        return super(BlogSerializer,
+        return super(BlogsSerializer,
                      self).update(instance, validated_data)
                 
 class CommentsSerializer(serializers.ModelSerializer):
@@ -46,3 +54,21 @@ class CommentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
         fields = '__all__'
+
+class BlogLikesSerializer(serializers.ModelSerializer):
+    likes = UserShowSerializer(many=True)
+    likes_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Blogs
+        fields = ['likes_count', 'likes']
+    
+    def get_likes_count(self, obj):
+        return obj.likes.count()
+
+class ActivitySerializer(serializers.ModelSerializer):
+    blog = BlogsSerializer()
+
+    class Meta:
+        model = Activity
+        fields = ['user', 'logs', 'blog']

@@ -3,7 +3,10 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
-from blogs.models import Comments
+from blogs.models import Comments, Blogs, Activity
+from accounts.models import User
+from .serializers import BlogLikesSerializer, BlogsSerializer
+import logging
 
 class BaseFilterMixin:
     search_fields = ['title', 'content']
@@ -54,16 +57,18 @@ class CommentsMixin:
         if serializers.is_valid():
             serializers.save()
 
+            logging.info("Commented on %s '%s'", self.instance_name, pk)
+            Activity.objects.create(user=request.user, blog=blog, logs = f"Commented on the blog '{pk}'")
             return Response(data={
                 'status':True,
-                'message':f"{self.instance_name} created Successfully",
+                'message':f"comment created Successfully",
                 'data':serializers.data
 
             }, status=status.HTTP_201_CREATED)
 
         return Response(data={
             'status':False,
-            'message':f"{self.instance_name} creation failed",
+            'message':f"comment creation failed",
             'data':serializers.errors
 
         }, status=status.HTTP_400_BAD_REQUEST)
@@ -80,12 +85,29 @@ class CommentsMixin:
 
         instance = Comments.objects.filter(blog=blog.id)
         serializer = self.get_serializer(instance=instance, many=True)
+
+        #logging
+        logging.info("Commented retrieved for %s '%s'", self.instance_name, pk)
+        Activity.objects.create(user=request.user, blog=blog, logs = f"Commented retrieved for blog '{pk}'")
     
         return Response(data={
             'status':True,
             'message':f'Comments retrieved successfully',
             'data':serializer.data
         })
+    @action(methods=['DELETE'], detail=True)
+    def comment(self, request, pk, *args, **kwargs):
+        assert self.model_class is not None
+        instance = Comments.objects.get(id=pk)
+        instance.delete()
+
+        #logging
+        logging.info("Deleted Comment '%s'", self.instance_name, pk)
+
+        return Response(data={
+            'status':True,
+            'message':f'Comment deleted',
+        }, status=status.HTTP_200_OK)
 
 class LikesMixin:
     @action(methods=['POST'], detail=True)
@@ -101,14 +123,69 @@ class LikesMixin:
         if blogs.likes.filter(id=_user).exists():
             blogs.likes.remove(_user)
 
+            logging.info("Disliked %s '%s'", self.instance_name, kwargs.get('pk'))
+            Activity.objects.create(user=request.user, blog=blogs, logs = f"Disliked blog '{kwargs.get('pk')}'")
+
             return Response(data={
                 'status':True,
                 'message':f'{self.instance_name} disliked successfully',
             })
         
         blogs.likes.add(_user)
+
+        logging.info("Liked %s '%s'", self.instance_name, kwargs.get('pk'))
+        Activity.objects.create(user=request.user, blog=blogs, logs = f"Liked blog '{kwargs.get('pk')}'")
+
         return Response(data={
             'status':True,
             'message':f'{self.instance_name} liked successfully',
         })
 
+    @action(methods=['GET'], detail=True)
+    def likes(self, request, *args, **kwargs):
+        if not self.model_class.objects.filter(id=kwargs.get('pk')).exists():
+            return Response(data={
+                'status':False,
+                'message':f'Blog not found'
+            })
+        blogs = self.model_class.objects.get(id=kwargs.get('pk'))
+        serializer = BlogLikesSerializer(instance=blogs)
+
+        return Response(data={
+            'status':True,
+            'message': f"Total Likes of user {kwargs.get('pk')}",
+            'data':serializer.data
+        })
+
+class ActivityMixin:
+    @action(methods=['GET'], detail=True)
+    def activity(self, request, *args, **kwargs):
+        if not self.model_class.objects.filter(id=kwargs.get('pk')).exists():
+            return Response(data={
+                'status':False,
+                'message':f'Blog not found'
+            })
+
+        # user = User.get(id=kwargs.get('pk'))
+        instance = Activity.objects.filter(user=request.user)
+        serializers = self.get_serializer(instance=instance, many=True)
+
+        return Response(data={
+            'status':True,
+            'message':f"All the activities of blog {kwargs.get('pk')}",
+            'data':serializers.data
+        })
+
+class TagsMixin:
+    @action(methods=['GET'], detail=False, url_path="(?P<name>[^/.]+)/blogs", url_name='blogs')
+    def blogs(self, request,*args, **kwargs):
+        tagname = kwargs.get('name')
+        blogs = Blogs.objects.filter(tags__name = tagname)
+
+        serializer = BlogsSerializer(blogs, many=True)
+
+        return Response(data={
+            'status':True,
+            'message':f'this is the {tagname} of the tag',
+            'data':serializer.data
+        })
