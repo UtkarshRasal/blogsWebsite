@@ -209,10 +209,10 @@ class LeaderBoardMixin:
 
     @action(methods=['GET'], detail=False, url_path='leaderboard', url_name='leaderboard')
     def leaderboard(self, request, *args, **kwargs):
-        request.GET.get('param')
+        query_param = request.GET.get('param')
         serializer = self.get_serializer(self.model_class.objects.all(), many=True)
 
-        if request.GET.get('param') == 'likes':        
+        if query_param == 'likes':        
             return Response(sorted(serializer.data, key=lambda blog: blog['likes_count'], 
                                     reverse = True if query_param=='likes' else False))
 
