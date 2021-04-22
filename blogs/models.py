@@ -18,7 +18,7 @@ class Tags(models.Model):
 class Blogs(BaseModel):
     '''blogs model'''
 
-    user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    user            = models.ForeignKey(User, related_name='user_blogs', null=True, on_delete=models.CASCADE)
     title           = models.CharField(max_length=255)
     content         = models.TextField()
     tags            = models.ManyToManyField(Tags)
@@ -35,7 +35,7 @@ class Blogs(BaseModel):
 class Comments(BaseModel):
     '''comments model with foreign keys to blog and users'''
  
-    blog            = models.ForeignKey(Blogs, null=True, on_delete=models.CASCADE)
+    blog            = models.ForeignKey(Blogs, related_name ='comments', null=True, on_delete=models.CASCADE)
     user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     comment         = models.TextField()
 
@@ -48,7 +48,7 @@ class Comments(BaseModel):
 
 class Activity(BaseModel):
     user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    blog           = models.ForeignKey(Blogs, null=True, on_delete=models.CASCADE)
+    blog            = models.ForeignKey(Blogs, null=True, on_delete=models.CASCADE)
 
     logs            = models.CharField(max_length=255)
 
@@ -56,3 +56,12 @@ class Activity(BaseModel):
         ordering = ['created_at']
         verbose_name_plural = 'Activity'
     
+class LeaderBoard(BaseModel):
+    blog            = models.ForeignKey(Blogs, null=True, on_delete = models.CASCADE)
+    comments        = models.IntegerField(blank=True)
+    likes           = models.IntegerField(blank=True)
+
+    class Meta:
+        ordering = ['-comments']
+        verbose_name_plural = 'Leaderboard'
+

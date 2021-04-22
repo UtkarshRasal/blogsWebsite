@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
-from blogs.models import Comments, Blogs, Activity
+from blogs.models import Comments, Blogs, Activity, LeaderBoard
 from accounts.models import User
-from .serializers import BlogLikesSerializer, BlogsSerializer
+from .serializers import (BlogLikesSerializer, BlogsSerializer, BlogsCommentSerializer, BlogLikeSerializer)
 import logging
 
 class BaseFilterMixin:
@@ -108,6 +108,19 @@ class CommentsMixin:
             'status':True,
             'message':f'Comment deleted',
         }, status=status.HTTP_200_OK)
+    
+    @action(methods=['GET'], detail=True)
+    def comments_count(self, request, *args, **kwargs):
+        import pdb;pdb.set_trace()
+        blogs = self.model_class.objects.get(id=kwargs.get('pk'))
+        serializer = BlogsCommentSerializer(instance=blogs)
+
+        return Response(data={
+            'status':True,
+            'message': f"Total Likes of user {kwargs.get('pk')}",
+            'data':serializer.data
+        })
+
 
 class LikesMixin:
     @action(methods=['POST'], detail=True)
@@ -122,6 +135,7 @@ class LikesMixin:
         _user = self.request.user.pk
         if blogs.likes.filter(id=_user).exists():
             blogs.likes.remove(_user)
+            print("like", blogs.likes.count())
 
             logging.info("Disliked %s '%s'", self.instance_name, kwargs.get('pk'))
             Activity.objects.create(user=request.user, blog=blogs, logs = f"Disliked blog '{kwargs.get('pk')}'")
@@ -132,6 +146,7 @@ class LikesMixin:
             })
         
         blogs.likes.add(_user)
+        print("comment", blogs.comments.count())
 
         logging.info("Liked %s '%s'", self.instance_name, kwargs.get('pk'))
         Activity.objects.create(user=request.user, blog=blogs, logs = f"Liked blog '{kwargs.get('pk')}'")
@@ -189,3 +204,22 @@ class TagsMixin:
             'message':f'this is the {tagname} of the tag',
             'data':serializer.data
         })
+
+class LeaderBoardMixin: 
+
+    @action(methods=['GET'], detail=False, url_path='leaderboard', url_name='leaderboard')
+    def leaderboard(self, request, *args, **kwargs):
+        query_param = request.GET.get('param')
+
+        if query_param=='likes':        
+            serializer = BlogLikeSerializer(self.model_class.objects.all(), many=True)
+
+            return Response(sorted(serializer.data, key=lambda blog: blog['likes_count'], 
+                                    reverse = True if query_param=='likes' else False))
+        
+        # if query_param=='comments':
+        serializer = BlogLikeSerializer(self.model_class.objects.all(), many=True)
+
+        return Response(sorted(serializer.data, key=lambda blog: blog['comments_count'], 
+                                reverse = True if query_param=='comments' else False))
+        

@@ -1,18 +1,19 @@
 from rest_framework import serializers
-from .models import Blogs, Comments, Tags, Activity
+from .models import Blogs, Comments, Tags, Activity, LeaderBoard
 from accounts.serializers import UserShowSerializer
+from accounts.models import User
 
 
 class TagsShowSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Tags
+        model  = Tags
         fields = ['id', 'name']
 
 class TagsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Tags       
+        model  = Tags       
         fields = ['name']
 
 class BlogsSerializer(serializers.ModelSerializer):
@@ -52,7 +53,7 @@ class BlogsSerializer(serializers.ModelSerializer):
 class CommentsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Comments
+        model  = Comments
         fields = '__all__'
 
 class BlogLikesSerializer(serializers.ModelSerializer):
@@ -60,7 +61,7 @@ class BlogLikesSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
 
     class Meta:
-        model = Blogs
+        model  = Blogs
         fields = ['likes_count', 'likes']
     
     def get_likes_count(self, obj):
@@ -69,7 +70,7 @@ class BlogLikesSerializer(serializers.ModelSerializer):
 class BlogsActivitySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Blogs
+        model  = Blogs
         fields = ['id', 'title']
 
 class ActivitySerializer(serializers.ModelSerializer):
@@ -77,6 +78,39 @@ class ActivitySerializer(serializers.ModelSerializer):
     # user = UserShowSerializer()
 
     class Meta:
-        model = Activity
+        model  = Activity
         fields = '__all__'
-        depth = 2
+        depth  = 2
+
+class UserBlogSerializer(serializers.ModelSerializer):
+    user_blogs = BlogsSerializer(many=True)
+    likes      = BlogsSerializer(many=True) 
+
+    class Meta:
+        model  = User
+        fields = '__all__'
+
+class BlogsCommentSerializer(serializers.ModelSerializer):
+    comments_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model  = Blogs
+        fields = ['id', 'comments_count']
+    
+    def get_comments_count(self, obj):
+        return obj.comments.count()
+
+
+class BlogLikeSerializer(serializers.ModelSerializer):
+    likes_count   =  serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField() 
+
+    class Meta:
+        model  = Blogs
+        fields = ['id','title', 'likes_count', 'comments_count']
+
+    def get_likes_count(self, obj):
+        return obj.likes.count()
+    
+    def get_comments_count(self, obj):
+        return obj.comments.count()
