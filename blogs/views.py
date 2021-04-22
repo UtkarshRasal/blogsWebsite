@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .models import Blogs, Comments, Tags, Activity, LeaderBoard
 from .serializers import ( BlogsSerializer, CommentsSerializer, 
                            TagsShowSerializer, ActivitySerializer, 
-                           BlogsCommentSerializer)
+                           BlogsLikeCommentSerializer)
 from .viewsets import BaseViewSet, TagsViewSet
 from .path import file_path
 from blogs import mixins
@@ -24,20 +24,10 @@ class BlogsView(BaseViewSet, mixins.LikesMixin, mixins.CommentsMixin, mixins.Act
         if self.action == 'activity':
             return ActivitySerializer
         if self.action == 'leaderboard':
-            return BlogsCommentSerializer
+            return BlogsLikeCommentSerializer
         return BlogsSerializer
 
 class TagsView(TagsViewSet, mixins.TagsMixin):
     serializer_class = TagsShowSerializer
     model_class      = Tags
     instance_name    = 'Tags'
-
-class UserView(APIView):
-    serializer_class = BlogsCommentSerializer
-    model_class = Blogs
-
-    def post(self, request, *args, **kwargs):
-        import pdb;pdb.set_trace()
-        serializer = self.serializer_class(self.model_class.objects.all(), many=True)
-
-        return Response(sorted(serializer.data, key=lambda blog: blog['comments_count'], reverse=True))

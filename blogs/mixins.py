@@ -5,7 +5,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
 from blogs.models import Comments, Blogs, Activity, LeaderBoard
 from accounts.models import User
-from .serializers import (BlogLikesSerializer, BlogsSerializer, BlogsCommentSerializer, BlogLikeSerializer)
+from .serializers import (BlogLikesSerializer, BlogsSerializer)
 import logging
 
 class BaseFilterMixin:
@@ -209,16 +209,12 @@ class LeaderBoardMixin:
 
     @action(methods=['GET'], detail=False, url_path='leaderboard', url_name='leaderboard')
     def leaderboard(self, request, *args, **kwargs):
-        query_param = request.GET.get('param')
+        request.GET.get('param')
+        serializer = self.get_serializer(self.model_class.objects.all(), many=True)
 
-        if query_param=='likes':        
-            serializer = BlogLikeSerializer(self.model_class.objects.all(), many=True)
-
+        if request.GET.get('param') == 'likes':        
             return Response(sorted(serializer.data, key=lambda blog: blog['likes_count'], 
                                     reverse = True if query_param=='likes' else False))
-        
-        # if query_param=='comments':
-        serializer = BlogLikeSerializer(self.model_class.objects.all(), many=True)
 
         return Response(sorted(serializer.data, key=lambda blog: blog['comments_count'], 
                                 reverse = True if query_param=='comments' else False))

@@ -11,6 +11,4 @@ router.register(r'tags', views.TagsView, basename='tags')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('sample/', views.UserView.as_view()),
-    # path('leaderboard/', views.LeaderBoardView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
