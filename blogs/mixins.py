@@ -5,7 +5,7 @@ from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
 from blogs.models import Comments, Blogs, Activity, LeaderBoard
 from accounts.models import User
-from .serializers import (BlogLikesSerializer, BlogsSerializer)
+from .serializers import (BlogLikesSerializer, BlogsSerializer, TagsBlogSerializers, TagsShowSerializer)
 import logging
 
 class BaseFilterMixin:
@@ -164,7 +164,7 @@ class LikesMixin:
                 'message':f'Blog not found'
             })
         blogs = self.model_class.objects.get(id=kwargs.get('pk'))
-        serializer = BlogLikesSerializer(instance=blogs)
+        serializer = self.get_serializer(instance=blogs)
 
         return Response(data={
             'status':True,
@@ -197,13 +197,20 @@ class TagsMixin:
         tagname = kwargs.get('name')
         blogs = Blogs.objects.filter(tags__name = tagname)
 
-        serializer = BlogsSerializer(blogs, many=True)
+        serializer = self.get_serializer(blogs, many=True)
 
         return Response(data={
             'status':True,
-            'message':f'this is the {tagname} of the tag',
+            'message':'Tags displayed successfully',
             'data':serializer.data
         })
+    
+    @action(methods=['GET'], detail=False, url_path="leaderboard", url_name='tags-blogs')
+    def leaderboard(self, request, *args, **kwargs):
+        queryset = self.model_class.objects.all()
+        serializers = self.get_serializer(queryset, many=True)
+
+        return Response(sorted(serializers.data, key=lambda tag: tag['blogs_count'], reverse=True))
 
 class LeaderBoardMixin: 
 
@@ -218,4 +225,3 @@ class LeaderBoardMixin:
 
         return Response(sorted(serializer.data, key=lambda blog: blog['comments_count'], 
                                 reverse = True if query_param=='comments' else False))
-        

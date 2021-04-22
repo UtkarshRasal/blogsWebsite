@@ -5,16 +5,40 @@ from accounts.models import User
 
 
 class TagsShowSerializer(serializers.ModelSerializer):
+    count = serializers.SerializerMethodField()
+
 
     class Meta:
-        model  = Tags
-        fields = ['id', 'name']
+        model  = Blogs
+        fields = ['id','count', 'title', 'tags']
+        depth = 1
+    
+    def get_count(self, obj):
+        return obj.tags.count()
 
-class TagsSerializer(serializers.ModelSerializer):
+    
+class BlogsActivitySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model  = Blogs
+        fields = ['id', 'title']
+
+class TagsBlogSerializers(serializers.ModelSerializer):
+    blogs = BlogsActivitySerializer(many=True)
+    blogs_count = serializers.SerializerMethodField()
 
     class Meta:
         model  = Tags       
-        fields = ['name']
+        fields = ['name', 'blogs_count', 'blogs']
+    
+    def get_blogs_count(self, obj):
+        return obj.blogs.count()
+        
+class TagsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tags
+        fields = ['id', 'name']
+
 
 class BlogsSerializer(serializers.ModelSerializer):
     tags = TagsSerializer(required=False, many=True)
@@ -66,12 +90,6 @@ class BlogLikesSerializer(serializers.ModelSerializer):
     
     def get_likes_count(self, obj):
         return obj.likes.count()
-    
-class BlogsActivitySerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model  = Blogs
-        fields = ['id', 'title']
 
 class ActivitySerializer(serializers.ModelSerializer):
     # blog = BlogsActivitySerializer()

@@ -3,9 +3,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Blogs, Comments, Tags, Activity, LeaderBoard
-from .serializers import ( BlogsSerializer, CommentsSerializer, 
-                           TagsShowSerializer, ActivitySerializer, 
-                           BlogsLikeCommentSerializer)
+from .serializers import ( BlogsSerializer, CommentsSerializer, BlogLikesSerializer, 
+                           TagsSerializer, ActivitySerializer, 
+                           BlogsLikeCommentSerializer, TagsShowSerializer,
+                           TagsBlogSerializers)
 from .viewsets import BaseViewSet, TagsViewSet
 from .path import file_path
 from blogs import mixins
@@ -21,6 +22,8 @@ class BlogsView(BaseViewSet, mixins.LikesMixin, mixins.CommentsMixin, mixins.Act
             return CommentsSerializer
         if self.action == 'comment':
             return CommentsSerializer
+        if self.action == 'likes':
+            return BlogLikesSerializer
         if self.action == 'activity':
             return ActivitySerializer
         if self.action == 'leaderboard':
@@ -28,6 +31,14 @@ class BlogsView(BaseViewSet, mixins.LikesMixin, mixins.CommentsMixin, mixins.Act
         return BlogsSerializer
 
 class TagsView(TagsViewSet, mixins.TagsMixin):
-    serializer_class = TagsShowSerializer
+    serializer_class = TagsSerializer
     model_class      = Tags
     instance_name    = 'Tags'
+
+    def get_serializer_class(self):
+        if self.action == 'blogs':
+            return TagsShowSerializer
+        if self.action == 'leaderboard':
+            return TagsBlogSerializers
+        return TagsSerializer
+

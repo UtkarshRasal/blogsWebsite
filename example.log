@@ -4542,3 +4542,711 @@ INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Dj
 INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/urls.py changed, reloading.
 INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
 INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 206, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+TypeError: 'int' object is not iterable
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 515, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 1882, in to_representation
+    return method(value)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py", line 17, in get_count
+    return obj.blogs.count()
+AttributeError: 'Blogs' object has no attribute 'blogs'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/models.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 457, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 97, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Blogs' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 502, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 490, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `name` on serializer `TagsShowSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Blogs` instance.
+Original exception text was: 'Blogs' object has no attribute 'name'.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 457, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 97, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Blogs' object has no attribute 'blogs'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 502, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 490, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `blogs` on serializer `TagsShowSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Blogs` instance.
+Original exception text was: 'Blogs' object has no attribute 'blogs'.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 457, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 97, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Blogs' object has no attribute 'blogs'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 502, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 490, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `blogs` on serializer `TagsShowSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Blogs` instance.
+Original exception text was: 'Blogs' object has no attribute 'blogs'.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 500, in to_representation
+    for field in fields:
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 361, in _readable_fields
+    for field in self.fields.values():
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/utils/functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 349, in fields
+    for key, value in self.get_fields().items():
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 1053, in get_fields
+    field_class, field_kwargs = self.build_field(
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 1199, in build_field
+    return self.build_unknown_field(field_name, model_class)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 1317, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `title` is not valid for model `Tags`.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 515, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 1882, in to_representation
+    return method(value)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py", line 17, in get_count
+    return obj.blogs.count()
+AttributeError: 'Blogs' object has no attribute 'blogs'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+ERROR:django.request:Internal Server Error: /blogs/leaderboard/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 213, in leaderboard
+    serializer = self.get_serializer(self.model_class.objects.all().order_by('comments_counts'), many=True)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/query.py", line 1134, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1919, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/sql/query.py", line 1481, in names_to_path
+    raise FieldError("Cannot resolve keyword '%s' into field. "
+django.core.exceptions.FieldError: Cannot resolve keyword 'comments_counts' into field. Choices are: activity, comments, content, created_at, id, leaderboard, likes, media_file, tags, title, updated_at, user, user_id
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+ERROR:django.request:Internal Server Error: /blogs/leaderboard/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 457, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 97, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'QuerySet' object has no attribute 'title'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 214, in leaderboard
+    return Response(serializer.data)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 548, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 502, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 490, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `title` on serializer `BlogsLikeCommentSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `QuerySet` instance.
+Original exception text was: 'QuerySet' object has no attribute 'title'.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:root:Commented on Blog 'ba926073-16c2-4ee6-9939-2603a7b6a3df'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+ERROR:django.request:Internal Server Error: /tags/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 200, in list
+    'data':serializers.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 515, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 1882, in to_representation
+    return method(value)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py", line 17, in get_count
+    return obj.tags.count()
+AttributeError: 'Tags' object has no attribute 'tags'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 457, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 97, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'ManyRelatedManager' object has no attribute 'title'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 200, in list
+    'data':serializers.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 515, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 502, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 490, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `title` on serializer `BlogsActivitySerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `ManyRelatedManager` instance.
+Original exception text was: 'ManyRelatedManager' object has no attribute 'title'.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 197, in list
+    return Response(sorted(serializer.data, key=lambda tag: tag['bogs_count']))
+NameError: name 'serializer' is not defined
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 197, in list
+    return Response(sorted(serializers.data, key=lambda tag: tag['bogs_count']))
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 197, in <lambda>
+    return Response(sorted(serializers.data, key=lambda tag: tag['bogs_count']))
+KeyError: 'bogs_count'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+WARNING:django.request:Not Found: /tags/display/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/display/
+WARNING:django.request:Not Found: /tags/display/
+WARNING:django.request:Not Found: /tags/display/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/urls.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/urls.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/blogs
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 116, in __call__
+    response = self.process_response(request, response)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/middleware/clickjacking.py", line 26, in process_response
+    if response.get('X-Frame-Options') is not None:
+AttributeError: 'function' object has no attribute 'get'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/blogs
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/utils/deprecation.py", line 116, in __call__
+    response = self.process_response(request, response)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/middleware/clickjacking.py", line 26, in process_response
+    if response.get('X-Frame-Options') is not None:
+AttributeError: 'function' object has no attribute 'get'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/urls.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+WARNING:django.request:Not Found: /tags/display/
+WARNING:django.request:Not Found: /tags//display
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/display/display
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags//display
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/575aefcf-26ac-4b06-b2c2-9cd2a810808c/blogs
+WARNING:django.request:Not Found: /tags/django/blogs
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/django/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 457, in get_attribute
+    return get_attribute(instance, self.source_attrs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 97, in get_attribute
+    instance = getattr(instance, attr)
+AttributeError: 'Blogs' object has no attribute 'name'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 205, in blogs
+    'data':serializer.data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 745, in data
+    ret = super().data
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 246, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 663, in to_representation
+    return [
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 664, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/serializers.py", line 502, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/fields.py", line 490, in get_attribute
+    raise type(exc)(msg)
+AttributeError: Got AttributeError when attempting to get a value for field `name` on serializer `TagsSerializer`.
+The serializer field might be named incorrectly and not match any attribute or key on the `Blogs` instance.
+Original exception text was: 'Blogs' object has no attribute 'name'.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Not Found: /tags/blogs/
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/serializers.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 197, in list
+    return Response(sorted(serializers.data, key=lambda tag: tag['blogs_count'], reverse=True))
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 197, in <lambda>
+    return Response(sorted(serializers.data, key=lambda tag: tag['blogs_count'], reverse=True))
+KeyError: 'blogs_count'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/leaderboard/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 211, in leaderboard
+    serializers = self.get_serializer(queryset, many=True)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/generics.py", line 110, in get_serializer
+    return serializer_class(*args, **kwargs)
+TypeError: 'NoneType' object is not callable
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+ERROR:django.request:Internal Server Error: /tags/leaderboard/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 213, in leaderboard
+    return Response(sorted(serializers.data, key=lambda tag: tag['blogs_count'], reverse=True))
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 213, in <lambda>
+    return Response(sorted(serializers.data, key=lambda tag: tag['blogs_count'], reverse=True))
+KeyError: 'blogs_count'
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/views.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.

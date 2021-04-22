@@ -21,7 +21,7 @@ class Blogs(BaseModel):
     user            = models.ForeignKey(User, related_name='user_blogs', null=True, on_delete=models.CASCADE)
     title           = models.CharField(max_length=255)
     content         = models.TextField()
-    tags            = models.ManyToManyField(Tags)
+    tags            = models.ManyToManyField(Tags, related_name='blogs')
     likes           = models.ManyToManyField(User, related_name='likes')
     media_file      = models.CharField(max_length=255, blank=True)
 
