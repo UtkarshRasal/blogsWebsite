@@ -55,13 +55,3 @@ class Activity(BaseModel):
     class Meta:
         ordering = ['created_at']
         verbose_name_plural = 'Activity'
-    
-class LeaderBoard(BaseModel):
-    blog            = models.ForeignKey(Blogs, null=True, on_delete = models.CASCADE)
-    comments        = models.IntegerField(blank=True)
-    likes           = models.IntegerField(blank=True)
-
-    class Meta:
-        ordering = ['-comments']
-        verbose_name_plural = 'Leaderboard'
-

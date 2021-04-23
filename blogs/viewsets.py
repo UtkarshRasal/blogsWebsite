@@ -1,5 +1,6 @@
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 from rest_framework import permissions, status, filters
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -9,6 +10,7 @@ from rest_framework.decorators import action
 from base.pagination import SmallResultsSetPagination
 from blogs import mixins
 from .models import Blogs, Activity
+from .serializers import DateWiseSerializer
 from .path import file_path
 import json, logging
 
@@ -24,25 +26,80 @@ class BaseViewSet(ModelViewSet):
     def list(self, request):
         assert self.serializer_class is not None
         assert self.model_class is not None
-        instance = self.model_class.objects.filter(user=request.user.pk)
-        '''search filter'''
-        queryset_list = super().filter_queryset(instance)
+        
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+        month    = request.GET.get('month')
 
-        '''pagination'''
-        page = self.paginate_queryset(queryset_list)
-        if page is not None:
-            serializers = self.get_paginated_response(self.serializer_class(page, many=True).data)
+        if start_date and end_date is not None:
+            try:
+                instance = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user.pk)
+                # '''search filter'''
+                # queryset_list = super().filter_queryset(instance)
 
-            #logging
-            logging.info("%s's listed for the user '%s'", self.instance_name, request.user.pk)
+                '''pagination'''
+                page = self.paginate_queryset(instance)
+                if page is not None:
+                    serializers = self.get_paginated_response(DateWiseSerializer(page, many=True).data)
+
+                    #logging
+                    logging.info("%s's listed for the user '%s'", self.instance_name, request.user.pk)
+                else:
+                    serializers = self.get_serializer(instance, many=True)  
+
+                return Response({   
+                    'status':True,
+                    'message':f'Blogs from the dates {start_date} to {end_date} retrieved successfully',
+                    'data':serializers.data
+                }, status=status.HTTP_200_OK)
+            except:
+                raise ValidationError(f'Date has an invalid format. It must be in YYYY-MM-DD')
+            
+        elif month is not None:
+            try:
+                instance = self.model_class.objects.filter(created_at__month__gte = month, user=request.user.pk)
+                # '''search filter'''
+                # queryset_list = super().filter_queryset(instance)
+
+                '''pagination'''
+                page = self.paginate_queryset(instance)
+                if page is not None:
+                    serializers = self.get_paginated_response(DateWiseSerializer(page, many=True).data)
+
+                    #logging
+                    logging.info("%s's listed for the user '%s'", self.instance_name, request.user.pk)
+                else:
+                    serializers = self.get_serializer(instance, many=True)  
+
+                return Response({   
+                    'status':True,
+                    'message':f'Blogs for the month {month} retrieved successfully',
+                    'data':serializers.data
+                }, status=status.HTTP_200_OK)
+            except:
+                raise ValidationError(f'Month has to be in integer value')
+
+
         else:
-            serializers = self.get_serializer(instance, many=True)  
+            instance = self.model_class.objects.filter(user=request.user.pk)
+            '''search filter'''
+            queryset_list = super().filter_queryset(instance)
 
-        return Response({   
-            'status':True,
-            'message':f'{self.instance_name} retrieved successfully',
-            'data':serializers.data
-        }, status=status.HTTP_200_OK)
+            '''pagination'''
+            page = self.paginate_queryset(queryset_list)
+            if page is not None:
+                serializers = self.get_paginated_response(self.serializer_class(page, many=True).data)
+
+                #logging
+                logging.info("%s's listed for the user '%s'", self.instance_name, request.user.pk)
+            else:
+                serializers = self.get_serializer(instance, many=True)  
+
+            return Response({   
+                'status':True,
+                'message':f'{self.instance_name} retrieved successfully',
+                'data':serializers.data
+            }, status=status.HTTP_200_OK)
     
     def create(self, request, *args, **kwargs):
         current_site = get_current_site(request).domain
@@ -187,12 +244,22 @@ class BaseViewSet(ModelViewSet):
         }, status=status.HTTP_200_OK)
 
 class TagsViewSet(ModelViewSet):
+    pagination_class = SmallResultsSetPagination
     def get_queryset(self):
         return self.model_class.objects.all()
     
     def list(self, request, *args, **kwargs):
         queryset = self.model_class.objects.all()
-        serializers = self.serializer_class(queryset, many=True)
+        # serializers = self.serializer_class(queryset, many=True)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializers = self.get_paginated_response(self.serializer_class(page, many=True).data)
+
+            #logging
+            logging.info("%s's listed for the user '%s'", self.instance_name, request.user.pk)
+        else:
+            serializers = self.get_serializer(instance, many=True)
 
         return Response(data={
             'status':True,

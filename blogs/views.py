@@ -2,7 +2,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from rest_framework.viewsets import ViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Blogs, Comments, Tags, Activity, LeaderBoard
+from .models import Blogs, Comments, Tags, Activity
 from .serializers import ( BlogsSerializer, CommentsSerializer, BlogLikesSerializer, 
                            TagsSerializer, ActivitySerializer, 
                            BlogsLikeCommentSerializer, TagsShowSerializer,

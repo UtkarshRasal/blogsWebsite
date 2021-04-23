@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Blogs, Comments, Tags, Activity, LeaderBoard
+from .models import Blogs, Comments, Tags, Activity
 from accounts.serializers import UserShowSerializer
 from accounts.models import User
 
@@ -33,7 +33,7 @@ class TagsBlogSerializers(serializers.ModelSerializer):
     
     def get_blogs_count(self, obj):
         return obj.blogs.count()
-        
+
 class TagsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tags
@@ -121,3 +121,9 @@ class BlogsLikeCommentSerializer(serializers.ModelSerializer):
     
     def get_comments_count(self, obj):
         return obj.comments.count()
+
+class DateWiseSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Blogs
+        fields = ['id', 'title']

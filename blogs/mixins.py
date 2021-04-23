@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter
 from rest_framework.decorators import action
-from blogs.models import Comments, Blogs, Activity, LeaderBoard
+from blogs.models import Comments, Blogs, Activity
 from accounts.models import User
-from .serializers import (BlogLikesSerializer, BlogsSerializer, TagsBlogSerializers, TagsShowSerializer)
+from .serializers import (BlogLikesSerializer, BlogsSerializer, TagsBlogSerializers, TagsShowSerializer,)
 import logging
 
 class BaseFilterMixin:
