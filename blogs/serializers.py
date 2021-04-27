@@ -1,7 +1,8 @@
-from rest_framework import serializers
-from .models import Blogs, Comments, Tags, Activity
-from accounts.serializers import UserShowSerializer
 from accounts.models import User
+from accounts.serializers import UserShowSerializer
+from rest_framework import serializers
+
+from .models import Activity, Blogs, Comments, Tags
 
 
 class TagsShowSerializer(serializers.ModelSerializer):
@@ -78,7 +79,7 @@ class CommentsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model  = Comments
-        fields = '__all__'
+        fields = ['id', 'blog', 'user', 'comment']
 
 class BlogLikesSerializer(serializers.ModelSerializer):
     likes = UserShowSerializer(many=True)
@@ -127,3 +128,50 @@ class DateWiseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blogs
         fields = ['id', 'title']
+
+class BlogCSVSerializer(serializers.ModelSerializer):
+    tags = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Blogs
+        fields = ['id', 'user', 'title', 'content', 'tags', 'media_file', 'created_at']
+    
+    def get_tags(self, obj):
+        tags_list = []
+        for items in obj.tags.all():
+            tags_list.append(items.name)
+        return ', '.join(tags_list)
+
+class CommentCSVSerializer(serializers.ModelSerializer):
+    comments_count = serializers.SerializerMethodField()
+    comment = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Blogs
+        fields = ['id', 'title', 'comments_count', 'comment'] 
+
+    def get_comments_count(self, obj):
+        return obj.comments.count()
+
+    def get_comment(self, obj):
+        list_comments = []
+        for items in obj.comments.all():
+            list_comments.append('{}'.format(items.comment))
+        return ', '.join(list_comments)
+
+class LikeCSVSerializer(serializers.ModelSerializer):
+    likes_count = serializers.SerializerMethodField()
+    likes = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Blogs
+        fields = ['id', 'title', 'likes_count', 'likes'] 
+
+    def get_likes_count(self, obj):
+        return obj.likes.count()
+    
+    def get_likes(self, obj):
+        likes_list = []
+        for items in obj.likes.values('first_name', 'last_name'):
+            likes_list.append('{} {}'.format(items['first_name'], items['last_name']) )
+        return ', '.join(likes_list)

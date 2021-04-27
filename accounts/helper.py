@@ -12,7 +12,7 @@ class VerifyEmail(APIView):
             user.is_verified = True
             user.save()
             
-            return Response(f"Successfully Verified", status.HTTP_201_CREATED)
+            return Response("Successfully Verified", status.HTTP_201_CREATED)
         except User.DoesNotExist:
             return Response({'Not a valid uid'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -34,7 +34,7 @@ class ChangePasswordView(APIView):
                 password = self.request.data['password']
                 user = self.model_class.objects.filter(id=pk).update(password=password)
 
-                return Response(f"Passwords Changed Successfully")
+                return Response("Passwords Changed Successfully")
 
         except User.DoesNotExist:
             return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)

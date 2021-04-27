@@ -1,14 +1,24 @@
-from rest_framework import pagination, status, permissions
-from rest_framework.response import Response
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.filters import SearchFilter
-from rest_framework.decorators import action
-from blogs.models import Comments, Blogs, Activity
-from accounts.models import User
-from .serializers import (BlogLikesSerializer, BlogsSerializer, TagsBlogSerializers, TagsShowSerializer,)
 import logging
+from datetime import datetime
+
+from accounts.models import User
+from django.db.models import Prefetch, Q
+from rest_framework import pagination, permissions, status
+from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+
+from .helper import (generate_blogs_report, generate_comments_report,
+                     generate_likes_report, return_csv_response)
+from .models import Activity, Blogs, Comments
+from .serializers import (BlogLikesSerializer, BlogsSerializer,
+                          TagsBlogSerializers, TagsShowSerializer)
+
 
 class BaseFilterMixin:
+    ''' Search related mixin'''
+
     search_fields = ['title', 'content']
     filter_backends = (SearchFilter, )
 
@@ -40,6 +50,7 @@ class PaginationHandlerMixin(object):
 
 class CommentsMixin:
     permission_classes = [permissions.IsAuthenticated]
+
     @action(methods=['POST'], detail=True)
     def post_comment(self, request, pk, *args, **kwargs):
         user = request.data
@@ -95,8 +106,9 @@ class CommentsMixin:
             'message':f'Comments retrieved successfully',
             'data':serializer.data
         })
+        
     @action(methods=['DELETE'], detail=True)
-    def comment(self, request, pk, *args, **kwargs):
+    def delete_comment(self, request, pk, *args, **kwargs):
         assert self.model_class is not None
         instance = Comments.objects.get(id=pk)
         instance.delete()
@@ -123,6 +135,8 @@ class CommentsMixin:
 
 
 class LikesMixin:
+
+    #like_dislike a blog
     @action(methods=['POST'], detail=True)
     def like_dislike(self, request, *args, **kwargs):
         if not self.model_class.objects.filter(id=kwargs.get('pk')).exists():
@@ -156,6 +170,7 @@ class LikesMixin:
             'message':f'{self.instance_name} liked successfully',
         })
 
+    #get all the likes for a blog
     @action(methods=['GET'], detail=True)
     def likes(self, request, *args, **kwargs):
         if not self.model_class.objects.filter(id=kwargs.get('pk')).exists():
@@ -225,3 +240,54 @@ class LeaderBoardMixin:
 
         return Response(sorted(serializer.data, key=lambda blog: blog['comments_count'], 
                                 reverse = True if query_param=='comments' else False))
+    
+
+    @action(methods=['GET'], detail=False, url_path='report/blogs', url_name='reports')
+    def blogs_report(self, request, *args, **kwargs):
+        assert self.serializer_class is not None
+        assert self.model_class is not None
+
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
+        serializers = self.get_serializer(queryset, many=True)
+        data = serializers.data
+
+        '''generate report of the blogs created'''
+        df = generate_blogs_report(data)
+        
+        return return_csv_response(df, "CSV/Blogs ")
+
+    @action(methods=['GET'], detail=False, url_path='report/comments', url_name='reports')
+    def comment_report(self, request, *args, **kwargs):
+        assert self.serializer_class is not None
+        assert self.model_class is not None
+
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
+        serializers = self.get_serializer(queryset, many=True)
+        data = serializers.data
+        
+        # '''comments report'''
+        df = generate_comments_report(data)
+
+        return return_csv_response(df, 'CSV/Comments ')
+    
+    @action(methods=['GET'], detail=False, url_path='report/likes', url_name='reports')
+    def likes_report(self, request, *args, **kwargs):
+        assert self.serializer_class is not None
+        assert self.model_class is not None
+
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
+        serializers = self.get_serializer(queryset, many=True)
+        data = serializers.data
+        # '''comments report'''
+        df = generate_likes_report(data)
+
+        return return_csv_response(df, "CSV/Likes ")

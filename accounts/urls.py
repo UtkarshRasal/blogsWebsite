@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import RegisterView, LoginView, ForgetPasswordView
+from accounts import views
 # UserListing)
-from .helper import VerifyEmail, ChangePasswordView
+from accounts import helper
 
 urlpatterns = [
-    path('register/', RegisterView.as_view(), name='register'),
-    path('email-verify/<str:pk>', VerifyEmail.as_view(), name='email-verify'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('forgotPass/', ForgetPasswordView.as_view(), name='forgot-pass'),
-    path('change-pass/<str:pk>', ChangePasswordView.as_view()),
-    # path('user/', UserListing.as_view())
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('email-verify/<str:pk>', helper.VerifyEmail.as_view(), name='email-verify'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('forgotPass/', views.ForgetPasswordView.as_view(), name='forgot-pass'),
+    path('change-pass/<str:pk>', helper.ChangePasswordView.as_view()),
+    path('user/', views.UserListing.as_view())
 ]

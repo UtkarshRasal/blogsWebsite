@@ -1,7 +1,10 @@
-from django.db import models
+import datetime
+import uuid
+
 from accounts.models import User
 from base.models import BaseModel
-import datetime, uuid
+from django.db import models
+
 
 class Tags(models.Model):
     ''' model for tags creation'''
@@ -31,6 +34,9 @@ class Blogs(BaseModel):
 
     def __str__(self):
         return self.title
+    
+    def get_likes(self):
+        return self.likes.count()
 
 class Comments(BaseModel):
     '''comments model with foreign keys to blog and users'''
@@ -40,11 +46,8 @@ class Comments(BaseModel):
     comment         = models.TextField()
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']
         verbose_name_plural = 'Comments'
-
-    def __all__(self):
-        return self.id 
 
 class Activity(BaseModel):
     user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
@@ -53,5 +56,8 @@ class Activity(BaseModel):
     logs            = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']
         verbose_name_plural = 'Activity'
+    
+    def __str__(self):
+        return '{} ({})'.format(self.user.email, self.blog.title)

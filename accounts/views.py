@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.sites.shortcuts import get_current_site
+from base.pagination import SmallResultsSetPagination
 from .models import User
 from .utils import Util
-from .serializers import RegisterSerializer, LoginSerializer, ForgetPasswordSerializer, ChangePasswordSerializer
+from .serializers import RegisterSerializer, LoginSerializer, ForgetPasswordSerializer, ChangePasswordSerializer, UserShowSerializer
 from rest_framework import status, permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
@@ -15,6 +16,11 @@ class RegisterView(APIView):
 
     def post(self, request):
         data = request.data
+
+        for field in ['first_name', 'last_name', 'email', 'password']:
+                if not data.get(field):
+                    return Response(f"{field} is required", status=status.HTTP_400_BAD_REQUEST)
+
         serializers = self.serializer_class(data=data)
         serializers.is_valid(raise_exception=True)
         serializers.save()
@@ -35,7 +41,8 @@ class RegisterView(APIView):
         Util.send_email(data)
 
         data = {
-            'message': 'Verification link sent to ' + email,
+            'status':True,
+            'message': f'Registered Successfully, Verification link sent to {email}',
             'data': _data
         }
 
@@ -67,12 +74,13 @@ class LoginView(APIView):
             
             token = RefreshToken.for_user(instance)
 
-            data = {
+            
+
+            return Response(data = {
+                'status':True,
                 'message': 'Login Successfully',
                 'access': str(token.access_token)
-            }
-
-            return Response(data, status.HTTP_200_OK)
+            }, status = status.HTTP_200_OK)
 
         except User.DoesNotExist:
             return Response('User does not exist', status.HTTP_400_BAD_REQUEST)
@@ -103,13 +111,16 @@ class ForgetPasswordView(APIView):
             data = {'email_body': email_body,'to_email': email, 'email_subject':'Change your password'}
 
             Util.send_email(data)
-            data = {'uid': uid ,'message': 'Link has been sent to '+ email + ' to change the passeword'}
-            return Response(data, status=status.HTTP_201_CREATED)
+
+            return Response({'uid': uid, 
+                    'message': f'Link has been sent to {email} to change the password'
+                }, status=status.HTTP_201_CREATED)
         except User.DoesNotExist:
             return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)
 
-# class UserListing(ListCreateAPIView):
-# 	"""docstring for UserListing"""
-# 	serializer_class = LoginSerializer
-# 	queryset = User.objects.all()
-# 	permission_classes = [permissions.IsAuthenticated]
+class UserListing(ListCreateAPIView):
+    pagination_class = SmallResultsSetPagination
+    """docstring for UserListing"""
+    serializer_class = UserShowSerializer
+    queryset = User.objects.all()
+    permission_classes = [permissions.IsAuthenticated]

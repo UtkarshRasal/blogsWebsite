@@ -18,6 +18,10 @@ class User(AbstractUser, models.Model):
 	REQUIRED_FIELDS = []
 
 	objects = UserManager()
+
+	class Meta:
+		ordering  = ['-created_at']
+		verbose_name_plural = 'User'
 	
 	def __str__(self):
 		return self.email
