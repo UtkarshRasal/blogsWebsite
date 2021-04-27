@@ -249,7 +249,7 @@ class LeaderBoardMixin:
         start_date = request.GET.get('start_date')
         end_date = request.GET.get('end_date')
 
-        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
+        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date))
         serializers = self.get_serializer(queryset, many=True)
         
         return serializers.data
