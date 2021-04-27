@@ -126,8 +126,8 @@ class BaseViewSet(ModelViewSet):
             
             # logging
             logging.info("created %s with title '%s'", self.instance_name, data['title'])
-            blog_id = data['id']
-            Activity.objects.create(user=request.user, blog=blog_id, logs = 'Blogs created Successfully')
+            blog = self.model_class.objects.get(id = data['id'])
+            Activity.objects.create(user=request.user, blog=blog, logs = 'Blogs created Successfully')
             
             return Response(data={
                 'status':True,

@@ -8931,3 +8931,90 @@ INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Dj
 INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
 INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
 INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+WARNING:django.request:Unauthorized: /blogs/report/comments/
+WARNING:django.request:Not Found: /amdin
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+ERROR:django.request:Internal Server Error: /blogs/report/blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 259, in blogs_report
+    data = self.get_data()
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py", line 249, in get_data
+    start_date = request.GET.get('start_date')
+NameError: name 'request' is not defined
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/mixins.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/helper.py changed, reloading.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/helper.py changed, reloading.
+ERROR:django.request:Internal Server Error: /blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 107, in create
+    path = 'http://' + current_site + '/' + file_path(request) # get path of the media_file
+TypeError: can only concatenate str (not "NoneType") to str
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/helper.py changed, reloading.
+INFO:root:created Blog with title 'TenthBlog'
+ERROR:django.request:Internal Server Error: /blogs/
+Traceback (most recent call last):
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py", line 130, in create
+    Activity.objects.create(user=request.user, blog=blog_id, logs = 'Blogs created Successfully')
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/query.py", line 445, in create
+    obj = self.model(**kwargs)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/base.py", line 483, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "/home/utkarshrasal/.local/lib/python3.8/site-packages/django/db/models/fields/related_descriptors.py", line 215, in __set__
+    raise ValueError(
+ValueError: Cannot assign "'ca148193-fd68-4a19-9d9a-c0a38fb9463d'": "Activity.blog" must be a "Blogs" instance.
+INFO:django.utils.autoreload:/media/utkarshrasal/4846FE1A46FE0908/WORK/PYTHON/Django/bloggingwebsite/blogs/viewsets.py changed, reloading.
+INFO:root:created Blog with title 'TenthBlog'

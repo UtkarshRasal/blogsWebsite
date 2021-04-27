@@ -242,8 +242,7 @@ class LeaderBoardMixin:
                                 reverse = True if query_param=='comments' else False))
     
 
-    @action(methods=['GET'], detail=False, url_path='report/blogs', url_name='reports')
-    def blogs_report(self, request, *args, **kwargs):
+    def get_data(self, request):
         assert self.serializer_class is not None
         assert self.model_class is not None
 
@@ -252,42 +251,29 @@ class LeaderBoardMixin:
 
         queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
         serializers = self.get_serializer(queryset, many=True)
-        data = serializers.data
+        
+        return serializers.data
 
-        '''generate report of the blogs created'''
+    @action(methods=['GET'], detail=False, url_path='report/blogs', url_name='reports')
+    def blogs_report(self, request, *args, **kwargs):
+
+        data = self.get_data(request)
         df = generate_blogs_report(data)
         
         return return_csv_response(df, "CSV/Blogs ")
 
     @action(methods=['GET'], detail=False, url_path='report/comments', url_name='reports')
     def comment_report(self, request, *args, **kwargs):
-        assert self.serializer_class is not None
-        assert self.model_class is not None
-
-        start_date = request.GET.get('start_date')
-        end_date = request.GET.get('end_date')
-
-        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
-        serializers = self.get_serializer(queryset, many=True)
-        data = serializers.data
         
-        # '''comments report'''
+        data = self.get_data(request)
         df = generate_comments_report(data)
 
         return return_csv_response(df, 'CSV/Comments ')
     
     @action(methods=['GET'], detail=False, url_path='report/likes', url_name='reports')
     def likes_report(self, request, *args, **kwargs):
-        assert self.serializer_class is not None
-        assert self.model_class is not None
 
-        start_date = request.GET.get('start_date')
-        end_date = request.GET.get('end_date')
-
-        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
-        serializers = self.get_serializer(queryset, many=True)
-        data = serializers.data
-        # '''comments report'''
+        data = self.get_data(request)
         df = generate_likes_report(data)
 
         return return_csv_response(df, "CSV/Likes ")
