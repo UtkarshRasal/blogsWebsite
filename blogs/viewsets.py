@@ -9,6 +9,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import filters, permissions, status
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
@@ -18,7 +20,7 @@ from rest_framework.viewsets import ModelViewSet, ViewSet
 
 from blogs import mixins
 
-from .helper import file_path, generate_blogs_report
+from .utils import file_path
 from .models import Activity, Blogs
 from .serializers import CommentsSerializer, DateWiseSerializer
 
@@ -34,10 +36,11 @@ class BaseViewSet(ModelViewSet):
     def get_queryset(self):
         return self.model_class.objects.all()
 
+    @method_decorator(cache_page(60*15))
     def list(self, request):
         assert self.serializer_class is not None
         assert self.model_class is not None
-
+        
         #query param, if data between two dates is required
         start_date = request.GET.get('start_date')
         end_date = request.GET.get('end_date')
@@ -104,9 +107,19 @@ class BaseViewSet(ModelViewSet):
     
     def create(self, request, *args, **kwargs):
         current_site = get_current_site(request).domain
-        path = 'http://' + current_site + '/' + file_path(request) # get path of the media_file
 
-        _tags = json.loads(request.data['tags']) # convert string to dictionary  
+        path = 'http://' + current_site + '/'
+        if request.FILES.get('file'):
+            path += file_path(request) # get path of the media_file
+
+        tags = request.data['tags']
+
+        if type(tags) is str:
+            _tags = json.loads(tags) # convert string to dictionary
+
+        else:
+            _tags = tags
+        
         tags = []
 
         # convert uppercase tags to lowercase
@@ -165,8 +178,13 @@ class BaseViewSet(ModelViewSet):
         current_site = get_current_site(request).domain
         path = 'http://' + current_site + '/' + file_path(request)
         _tags = request.data['tags']
-        tags = json.loads(_tags)
+        
+        if type(_tags) is str:
+            tags = json.loads(_tags) # convert string to dictionary
 
+        else:
+            tags = _tags
+        
         instance = self.model_class.objects.get(id=pk)
         serializers = self.get_serializer(instance=instance, data={**{'user':request.user.pk,
                                                     'media_file':path,
@@ -202,13 +220,13 @@ class BaseViewSet(ModelViewSet):
         if request.data.get('file'):
             current_site = get_current_site(request).domain
             path = 'http://' + current_site + '/' + file_path(request)
-            data = {'media_file':path}
+            _data = {'media_file':path}
         
         if request.data.get('title'):
-            data = {'title':request.data['title']}
+            _data = {'title':request.data['title']}
         
         if request.data.get('content'):
-            data = {'content':request.data['content']}
+            _data = {'content':request.data['content']}
         
         if request.data.get('tags'):
             _tags = json.loads(request.data['tags']) #convert string to dictionary  
@@ -216,9 +234,9 @@ class BaseViewSet(ModelViewSet):
             for i in range(len(_tags)):
                 tags.append({k: v.lower() for k, v in _tags[i].items()})
             
-            data = {'tags':tags}
+            _data = {'tags':tags}
 
-        serializers = self.get_serializer(instance=instance, data=data, partial=True)
+        serializers = self.get_serializer(instance=instance, data=_data, partial=True)
         if serializers.is_valid():
             serializers.save()
 
@@ -230,13 +248,13 @@ class BaseViewSet(ModelViewSet):
                 'status':True,
                 'message':f'{self.instance_name} updated Successfully',
                 'data':serializers.data
-            })
+            }, status=status.HTTP_201_CREATED)
 
         return Response(data={
                 'status':False,
                 'message':f'{self.instance_name} update Failed',
                 'data':serializers.errors
-            }) 
+            }, status=status.HTTP_400_BAD_REQUEST) 
 
     def destroy(self, request, pk, *args, **kwargs):
         assert self.model_class is not None
@@ -245,7 +263,7 @@ class BaseViewSet(ModelViewSet):
 
         #logging
         logging.info(f"Deleted {self.instance_name} '{pk}'")
-        Activity.objects.create(user=request.user, blog=instance, logs = 'Blog deleted Successfully')
+        #   Activity.objects.create(user=request.user, blog=instance, logs = 'Blog deleted Successfully')
 
         return Response(data={
             'status':True,

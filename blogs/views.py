@@ -15,11 +15,11 @@ from .serializers import (ActivitySerializer, BlogCSVSerializer,
                           TagsShowSerializer)
 from .viewsets import BaseViewSet, TagsViewSet
 
-
 class BlogsView(BaseViewSet, mixins.LikesMixin, mixins.CommentsMixin, mixins.ActivityMixin, mixins.LeaderBoardMixin):
     serializer_class    = BlogsSerializer
     model_class         = Blogs
     instance_name       = 'Blog'
+
     ACTION_SERIALIZERS  = {
         'post_comment': CommentsSerializer,
         'comment':CommentsSerializer,
@@ -38,6 +38,7 @@ class TagsView(TagsViewSet, mixins.TagsMixin):
     serializer_class     = TagsSerializer
     model_class          = Tags
     instance_name        = 'Tags'
+    
     ACTION_SERIALIZERS   = {
         'blogs':TagsShowSerializer,
         'leaderboard':TagsBlogSerializers

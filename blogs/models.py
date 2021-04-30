@@ -5,7 +5,6 @@ from accounts.models import User
 from base.models import BaseModel
 from django.db import models
 
-
 class Tags(models.Model):
     ''' model for tags creation'''
 
@@ -48,6 +47,7 @@ class Comments(BaseModel):
     class Meta:
         ordering = ['-created_at']
         verbose_name_plural = 'Comments'
+    
 
 class Activity(BaseModel):
     user            = models.ForeignKey(User, null=True, on_delete=models.CASCADE)

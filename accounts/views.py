@@ -46,7 +46,7 @@ class RegisterView(APIView):
             'data': _data
         }
 
-        return Response(data, status.HTTP_200_OK)
+        return Response(data, status.HTTP_201_CREATED)
 
 class LoginView(APIView):
     serializer_class = LoginSerializer

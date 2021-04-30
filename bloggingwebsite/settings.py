@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import datetime
+import os
 from pathlib import Path
-import os, datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'accounts',
     'blogs',
     'base',
+    'conversion',
 ]
 
 MIDDLEWARE = [
@@ -154,17 +156,3 @@ GRAPH_MODELS = {
     'all_applications': True,
     'group_models': True,
 }
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'root': {
-#         'handlers': ['console'],
-#         'level': 'INFO',
-#     },
-# }

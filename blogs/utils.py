@@ -6,30 +6,22 @@ from django.http import HttpResponse
 from datetime import datetime
 
 def file_path(request):
-    file = request.FILES['file']
-    path = os.path.join("uploads", file.name)
+    if not request.FILES.get('file'):
+        return ''
+    media_file = request.FILES['file']
+    path = os.path.join("uploads", media_file.name)
  
     return path
 
-def generate_blogs_report(data) -> pd.DataFrame:
-        
-    data_cols = ['id', 'user', 'title', 'content', 'tags', 'media_file', 'created_at']
+def generate_report(data, data_cols) -> pd.DataFrame:
+    '''
+    generate dataframe for the given data and data_cols
+
+    data - blogs, comments, likes serialized data
+    data_cols - columns used in the dataframe
+
+    '''   
     df = pd.DataFrame.from_dict(data).reindex(columns=data_cols)
-
-    return df
-
-def generate_comments_report(data) -> pd.DataFrame:
-        
-    data_cols = ['id', 'title', 'comments_count', 'comment']
-    df = pd.DataFrame.from_dict(data).reindex(columns=data_cols)
-    
-    return df
-
-def generate_likes_report(data) -> pd.DataFrame:
-        
-    data_cols = ['id', 'title', 'likes_count', 'likes']
-    df = pd.DataFrame.from_dict(data).reindex(columns=data_cols)
-
     return df
 
 def return_csv_response(df: pd.DataFrame, namescope:str) -> HttpResponse:

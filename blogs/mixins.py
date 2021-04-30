@@ -9,11 +9,10 @@ from rest_framework.filters import SearchFilter
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from .helper import (generate_blogs_report, generate_comments_report,
-                     generate_likes_report, return_csv_response)
 from .models import Activity, Blogs, Comments
 from .serializers import (BlogLikesSerializer, BlogsSerializer,
                           TagsBlogSerializers, TagsShowSerializer)
+from .utils import generate_report, return_csv_response
 
 
 class BaseFilterMixin:
@@ -54,6 +53,8 @@ class CommentsMixin:
     @action(methods=['POST'], detail=True)
     def post_comment(self, request, pk, *args, **kwargs):
         user = request.data
+
+        import pdb;pdb.set_trace()
 
         '''check if blog exist or not'''
         if not self.model_class.objects.filter(id=pk).exists():
@@ -123,7 +124,7 @@ class CommentsMixin:
     
     @action(methods=['GET'], detail=True)
     def comments_count(self, request, *args, **kwargs):
-        import pdb;pdb.set_trace()
+        
         blogs = self.model_class.objects.get(id=kwargs.get('pk'))
         serializer = BlogsCommentSerializer(instance=blogs)
 
@@ -249,7 +250,7 @@ class LeaderBoardMixin:
         start_date = request.GET.get('start_date')
         end_date = request.GET.get('end_date')
 
-        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date), user=request.user)
+        queryset = self.model_class.objects.filter(Q(created_at__gte = start_date)&Q(created_at__lte = end_date))
         serializers = self.get_serializer(queryset, many=True)
         
         return serializers.data
@@ -258,7 +259,8 @@ class LeaderBoardMixin:
     def blogs_report(self, request, *args, **kwargs):
 
         data = self.get_data(request)
-        df = generate_blogs_report(data)
+        data_cols = ['id', 'user', 'title', 'content', 'tags', 'media_file', 'created_at']
+        df = generate_report(data, data_cols)
         
         return return_csv_response(df, "CSV/Blogs ")
 
@@ -266,7 +268,8 @@ class LeaderBoardMixin:
     def comment_report(self, request, *args, **kwargs):
         
         data = self.get_data(request)
-        df = generate_comments_report(data)
+        data_cols = ['id', 'title', 'comments_count', 'comment']
+        df = generate_report(data, data_cols)
 
         return return_csv_response(df, 'CSV/Comments ')
     
@@ -274,6 +277,7 @@ class LeaderBoardMixin:
     def likes_report(self, request, *args, **kwargs):
 
         data = self.get_data(request)
-        df = generate_likes_report(data)
+        data_cols = ['id', 'title', 'likes_count', 'likes']
+        df = generate_report(data, data_cols)
 
         return return_csv_response(df, "CSV/Likes ")
